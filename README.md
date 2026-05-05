@@ -2,8 +2,6 @@
 
 A reproducible deep-learning forecasting pipeline for Apple Inc. daily close prices. The project loads OHLCV data, builds technical indicators, trains a stacked Bidirectional LSTM with Monte Carlo Dropout uncertainty, evaluates against simple baselines, and stress-tests a directional strategy with transaction costs.
 
-> This is a research project, not investment advice. The model's directional edge is intentionally presented conservatively.
-
 ## Highlights
 
 - Local CSV loader for Nasdaq/Yahoo-style historical data, with yfinance fallback
@@ -67,16 +65,6 @@ Input: 60 timesteps × 8 features
 
 The model is compiled with Adam and MSE loss. Uncertainty is estimated by keeping dropout active at inference and aggregating stochastic forward passes.
 
-## Evaluation design
-
-The project reports three categories of evidence:
-
-1. **Forecast accuracy**: RMSE, MAE, MAPE, and directional accuracy.
-2. **Baseline comparison**: naive last close and 5-day moving average.
-3. **Strategy viability**: total return, Sharpe ratio, max drawdown, trade count, and transaction-cost sensitivity.
-
-The backtest is intentionally simple: it goes long when the model predicts the next close above today's close and short otherwise. Transaction costs default to 0.05% per position change.
-
 
 ## Run tests
 
@@ -85,7 +73,6 @@ pip install -r requirements-dev.txt
 pytest
 ruff check .
 ```
-
 
 
 ## Expanded Figure Gallery
